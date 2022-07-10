@@ -1,6 +1,7 @@
 package com.example.application.views.dashboard;
 
 
+import com.example.application.security.AuthenticatedUser;
 import com.example.application.views.MainLayout;
 import com.example.application.views.dashboard.ServiceHealth.Status;
 import com.vaadin.flow.component.Component;
@@ -25,13 +26,15 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
+import javax.annotation.security.PermitAll;
+
 @PageTitle("Dashboard")
 @Route(value = "public-dashboard", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
-@AnonymousAllowed
+@PermitAll
 public class DashboardView extends Main {
 
-    public DashboardView() {
+    public DashboardView(AuthenticatedUser authenticatedUser) {
         addClassName("dashboard-view");
 
         Board board = new Board();

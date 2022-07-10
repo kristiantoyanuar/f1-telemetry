@@ -5,21 +5,16 @@ import com.example.application.components.appnav.AppNavItem;
 import com.example.application.data.entity.User;
 import com.example.application.security.AuthenticatedUser;
 import com.example.application.views.dashboard.DashboardView;
-import com.example.application.views.teamdashboard.TeamDashboardView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Footer;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
+
 import java.util.Optional;
 
 /**
@@ -69,14 +64,7 @@ public class MainLayout extends AppLayout {
         AppNav nav = new AppNav();
         nav.addClassNames("app-nav");
 
-        if (accessChecker.hasAccess(DashboardView.class)) {
-            nav.addItem(new AppNavItem("Dashboard", DashboardView.class, "la la-chart-area"));
-
-        }
-        if (accessChecker.hasAccess(TeamDashboardView.class)) {
-            nav.addItem(new AppNavItem("Team Dashboard", TeamDashboardView.class, "la la-chart-area"));
-
-        }
+        nav.addItem(new AppNavItem("Dashboard", DashboardView.class, "la la-chart-area"));
 
         return nav;
     }

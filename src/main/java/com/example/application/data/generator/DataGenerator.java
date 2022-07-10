@@ -24,14 +24,14 @@ public class DataGenerator {
 
             logger.info("Generating demo data");
 
-            logger.info("... generating 2 User entities...");
+            logger.info("... generating 1 User entities...");
             User user = new User();
             user.setName("John Normal");
             user.setUsername("user");
             user.setHashedPassword(passwordEncoder.encode("user"));
             user.setProfilePictureUrl(
                     "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80");
-            user.setRole(User.Role.USER);
+            user.setRole(User.Role.TEAM);
             userRepository.save(user);
 
             logger.info("Generated demo data");

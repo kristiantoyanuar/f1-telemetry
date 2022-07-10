@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class User extends AbstractEntity {
 
     public enum Role {
-        USER, ADMIN;
+        TEAM;
     }
 
     private String username;
