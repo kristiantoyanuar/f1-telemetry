@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityManager;
@@ -19,6 +20,7 @@ import java.util.List;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 class SpeedRepositoryTest {
     @Autowired
     private DataSource dataSource;
@@ -41,6 +43,8 @@ class SpeedRepositoryTest {
         now.setCar(mycar);
         now.setSpeed(90);
         now.setTimestamp(new Date());
+
+        Date minus5mins = DateUtils.addMinutes(now.getTimestamp(), -5);
 
         Speed nMinus4Mins = new Speed();
         nMinus4Mins.setCar(mycar);
@@ -76,6 +80,8 @@ class SpeedRepositoryTest {
         now.setSpeed(90);
         now.setTimestamp(DateUtils.addMinutes(nowDate, -120));
 
+        Date minus5mins = DateUtils.addMinutes(now.getTimestamp(), -5);
+
         Speed nMinus4Mins = new Speed();
         nMinus4Mins.setCar(mycar);
         nMinus4Mins.setSpeed(50);
@@ -110,6 +116,8 @@ class SpeedRepositoryTest {
         now.setSpeed(90);
         now.setTimestamp(new Date());
 
+        Date minus5mins = DateUtils.addMinutes(now.getTimestamp(), -5);
+
         Speed nMinus4Mins = new Speed();
         nMinus4Mins.setCar(mycar);
         nMinus4Mins.setSpeed(50);
@@ -143,6 +151,8 @@ class SpeedRepositoryTest {
         now.setCar(mycar);
         now.setSpeed(90);
         now.setTimestamp(DateUtils.addMinutes(nowDate, -120));
+
+        Date minus5mins = DateUtils.addMinutes(now.getTimestamp(), -5);
 
         Speed nMinus4Mins = new Speed();
         nMinus4Mins.setCar(mycar);

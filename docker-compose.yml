@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=f1telemetry
+      - POSTGRES_PASSWORD=f1telemetry
+      - POSTGRES_DB=f1telemetry
+  app:
+    image: kris/f1-telemetry
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/f1telemetry
+    ports:
+      - '8080:8080'

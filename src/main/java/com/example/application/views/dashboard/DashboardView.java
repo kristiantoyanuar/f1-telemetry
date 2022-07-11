@@ -1,6 +1,7 @@
 package com.example.application.views.dashboard;
 
 
+import com.example.application.data.service.CarService;
 import com.example.application.security.AuthenticatedUser;
 import com.example.application.views.MainLayout;
 import com.example.application.views.dashboard.ServiceHealth.Status;
@@ -25,23 +26,35 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.domain.Pageable;
 
 import javax.annotation.security.PermitAll;
 
 @PageTitle("Dashboard")
 @Route(value = "public-dashboard", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
-@PermitAll
+@AnonymousAllowed
 public class DashboardView extends Main {
 
-    public DashboardView(AuthenticatedUser authenticatedUser) {
+    public DashboardView(AuthenticatedUser authenticatedUser, ConfigurableApplicationContext applicationContext) {
         addClassName("dashboard-view");
 
         Board board = new Board();
-        board.addRow(createHighlight("Current users", "745", 33.7), createHighlight("View events", "54.6k", -112.45),
-                createHighlight("Conversion rate", "18%", 3.9), createHighlight("Custom metric", "-123.45", 0.0));
-        board.addRow(createViewEvents());
-        board.addRow(createServiceHealth(), createResponseTimes());
+        applicationContext.getBean(CarService.class).list(Pageable.unpaged()).get()
+                        .forEach(car -> {
+                            board.addRow(
+                                    new CurrentSpeed(applicationContext, car),
+                                    new CurrentGearPosition(applicationContext, car),
+                                    new CurrentBrakeCondition(applicationContext, car)
+                            );
+                            board.addRow(new SpeedHistory(applicationContext, car, authenticatedUser));
+                        });
+
+//        board.addRow(createHighlight("Current users", "745", 33.7), createHighlight("View events", "54.6k", -112.45),
+//                createHighlight("Conversion rate", "18%", 3.9), createHighlight("Custom metric", "-123.45", 0.0));
+//        board.addRow(createViewEvents());
+//        board.addRow(createServiceHealth(), createResponseTimes());
         add(board);
     }
 
