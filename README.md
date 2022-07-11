@@ -1,6 +1,6 @@
 # F1 Telemetry
 
-This project show a simulation of dashboard with two roles : anonymous and user to visualize telemetry of speed, gear and brake condition of a F1 car. 
+This project show a simulation of telemtry dashboard with two roles : anonymous and team user to visualize telemetry of speed, gear and brake condition of a F1 car. 
 
 ## Running the application
 
